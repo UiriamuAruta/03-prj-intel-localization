@@ -10,57 +10,56 @@
   <style>
     /* Theme variables */
     :root {
-      --intel-blue: #0071c5;
-      --dark-blue: #004c8c;
+      --intel-blue: #005293;
+      --dark-blue: #002f5f;
       --white: #ffffff;
       --gray: #f2f2f2;
+      --text-color: #1a1a1a;
       --card-radius: 10px;
       --card-padding: 1rem;
       --transition-speed: 0.3s;
     }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: var(--gray);
-      color: #333;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    .skip-link:focus { top: 0; }
     header {
       background: linear-gradient(to right, var(--intel-blue), var(--dark-blue));
       color: var(--white);
       padding: 2rem 1rem;
       text-align: center;
     }
-
     header img {
       width: 120px;
       margin-bottom: 1rem;
     }
-
-    header h1 {
-      margin: 0.5rem 0;
-      font-size: 2.5rem;
-    }
-
-    header p {
-      max-width: 600px;
-      margin: auto;
-      font-size: 1.1rem;
-    }
-
     nav {
       position: sticky;
       top: 0;
       background: var(--white);
+      color: var(--text-color);
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       padding: 0.5rem;
       text-align: center;
       z-index: 1000;
       font-weight: bold;
     }
-
-    /* Timeline section styling */
     section.timeline {
       display: flex;
       overflow-x: auto;
@@ -69,7 +68,6 @@
       padding: 2rem 1rem;
       background: transparent;
     }
-
     section.timeline div {
       background: var(--white);
       flex: 0 0 300px;
@@ -78,179 +76,117 @@
       padding: var(--card-padding);
       scroll-snap-align: start;
       transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      border: 1px solid #ccc;
       position: relative;
     }
-
-    section.timeline div:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    section.timeline div:hover { transform: scale(1.03); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+    section.timeline img { width: 100%; border-radius: var(--card-radius); margin: 0.5rem 0; }
+    .btn-primary {
+      background-color: var(--intel-blue);
+      border-color: var(--dark-blue);
+      color: var(--white);
     }
-
-    section.timeline img {
-      width: 100%;
-      border-radius: var(--card-radius);
-      margin: 0.5rem 0;
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: #004080;
+      border-color: #001f3f;
     }
-
-    section.timeline h2 {
-      margin: 0;
-      color: var(--intel-blue);
+    a:focus, button:focus, input:focus {
+      outline: 3px solid var(--intel-blue);
+      outline-offset: 2px;
     }
-
-    section.timeline h3 {
-      margin: 0.2rem 0 0.5rem 0;
-      font-size: 1.2rem;
-    }
-
-    section.timeline p {
-      font-size: 0.95rem;
-    }
-
-    section.timeline div .details {
-      display: none;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: #444;
-    }
-
-    section.timeline div:hover .details {
-      display: block;
-    }
-
-    /* Override generic section styles for new content */
-    .new-columns-wrapper {
-      display: block !important;
-      overflow: visible !important;
-      scroll-snap-type: none !important;
-      background: transparent;
-    }
-
-    body > p:last-of-type {
-      text-align: center;
-      font-style: italic;
-      margin: 1rem 0;
-    }
-
     @media (max-width: 768px) {
-      section.timeline {
-        flex-direction: column;
-        overflow-x: visible;
-        scroll-snap-type: none;
-      }
-
-      section.timeline div {
-        width: 100%;
-      }
+      section.timeline { flex-direction: column; scroll-snap-type: none; }
+      section.timeline div { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <img src="img/intel-header-logo.svg" alt="Intel Logo" />
-      <h1>Sustainability Through the Ages</h1>
-      <p>
-        Explore Intel's journey through time, discovering how our commitment
-        to innovation has shaped a more sustainable future for technology 
-        and our planet.
-      </p>
-    </div>
+  <a href="#maincontent" class="skip-link">Skip to main content</a>
+  <header role="banner">
+    <img src="img/intel-header-logo.svg" alt="Intel logo in blue and white" />
+    <h1>Sustainability Through the Ages</h1>
+    <p dir="ltr">Explore Intel’s journey through time, discovering how our commitment to innovation has shaped a sustainable future.</p>
   </header>
-
-  <nav>
-    Intel Sustainability Timeline — Scroll or Tap to Explore Milestones
-  </nav>
-
-  <section class="timeline" dir="ltr">
-    <div>
-      <h2>1968</h2>
-      <h3>Intel is Founded</h3>
-      <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7" alt="Founding of Intel" />
-      <p>Beginning of Intel’s innovation journey.</p>
-      <div class="details">
-        Intel begins setting the foundation for technological advancement, which would later incorporate sustainable practices.
+  <nav role="navigation">Intel Sustainability Timeline — Scroll or Tap to Explore Milestones</nav>
+  <main id="maincontent" role="main">
+    <section class="timeline" dir="ltr" aria-label="Intel Sustainability Timeline">
+      <div>
+        <h2>1968</h2>
+        <h3>Intel is Founded</h3>
+        <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7" alt="Historic black and white photo of Intel founders" />
+        <p>Beginning of Intel’s innovation journey.</p>
       </div>
-    </div>
-    <div>
-      <h2>2003</h2>
-      <h3>First Sustainability Report</h3>
-      <img src="https://images.unsplash.com/photo-1593642634443-44adaa06623a?auto=format&fit=crop&w=800&q=60" alt="First Sustainability Report" />
-      <p>Intel releases its first corporate responsibility report.</p>
-      <div class="details">
-        This report outlines Intel’s environmental goals and community engagement efforts, launching a new era of accountability.
+      <div>
+        <h2>2003</h2>
+        <h3>First Sustainability Report</h3>
+        <img src="https://images.unsplash.com/photo-1593642634443-44adaa06623a?auto=format&fit=crop&w=800&q=60" alt="Cover image of Intel’s first sustainability report" />
+        <p>Intel releases its first corporate responsibility report.</p>
       </div>
-    </div>
-    <div>
-      <h2>2012</h2>
-      <h3>100% Conflict-Free Microprocessors</h3>
-      <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&w=800&q=60" alt="Conflict-Free Microprocessors" />
-      <p>Intel achieves 100% conflict-free validation for key minerals in its microprocessors.</p>
-      <div class="details">
-        Intel becomes the first company to produce microprocessors validated as conflict-free for tantalum, tin, tungsten, and gold.
+      <div>
+        <h2>2012</h2>
+        <h3>100% Conflict-Free Microprocessors</h3>
+        <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&w=800&q=60" alt="Close-up of a microprocessor labeled conflict-free" />
+        <p>Intel achieves conflict-free validation for key minerals.</p>
       </div>
-    </div>
-    <div>
-      <h2>2020</h2>
-      <h3>2030 RISE Strategy Announced</h3>
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="2030 RISE Strategy" />
-      <p>Intel announces its RISE strategy for 2030.</p>
-      <div class="details">
-        The RISE framework focuses on responsibility, inclusion, sustainability, and enabling technology to solve global challenges.
+      <div>
+        <h2>2020</h2>
+        <h3>2030 RISE Strategy Announced</h3>
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Graphic depicting Intel’s RISE strategy for 2030" />
+        <p>Intel announces its RISE strategy for 2030.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <p dir="ltr">Scroll to view timeline | Hover over cards to learn more!</p>
-
-  <!-- Three-Column Section: Wrapped in a DIV to avoid generic section styling -->
-  <div class="new-columns-wrapper container my-5" dir="ltr">
-    <div class="d-flex flex-column flex-md-row justify-content-between text-center text-md-start gap-4">
-      <div class="flex-fill p-4 border rounded bg-white shadow-sm">
-        <div class="mb-3">
-          <i class="bi bi-globe2 fs-1 text-primary"></i>
+    <div class="container text-center my-3" dir="ltr">
+      <p>Scroll to view timeline | Hover over cards to learn more!</p>
+    </div>
+    <div class="new-columns-wrapper container my-5" dir="ltr">
+      <div class="d-flex flex-column flex-md-row justify-content-between text-center text-md-start gap-4">
+        <div class="flex-fill p-4 border rounded bg-white shadow-sm">
+          <i class="bi bi-globe2 fs-1" aria-hidden="true"></i>
+          <h3>Global Impact</h3>
+          <p>Discover how Intel's sustainability programs drive change worldwide.</p>
+          <a href="#" class="btn btn-primary mt-2">Learn More</a>
         </div>
-        <h3>Global Impact</h3>
-        <p class="text-wrap">Discover how Intel's sustainability programs are driving change worldwide.</p>
-        <a href="#" class="btn btn-outline-primary mt-2">Learn More</a>
-      </div>
-      <div class="flex-fill p-4 border rounded bg-white shadow-sm">
-        <div class="mb-3">
-          <i class="bi bi-lightning-charge fs-1 text-warning"></i>
+        <div class="flex-fill p-4 border rounded bg-white shadow-sm">
+          <i class="bi bi-lightning-charge fs-1" aria-hidden="true"></i>
+          <h3>Clean Energy</h3>
+          <p>Intel powers facilities with 100% renewable energy globally.</p>
+          <a href="#" class="btn btn-primary mt-2">Learn More</a>
         </div>
-        <h3>Clean Energy</h3>
-        <p class="text-wrap">Intel is powering its facilities with 100% renewable energy in multiple countries.</p>
-        <a href="#" class="btn btn-outline-primary mt-2">Learn More</a>
-      </div>
-      <div class="flex-fill p-4 border rounded bg-white shadow-sm">
-        <div class="mb-3">
-          <i class="bi bi-recycle fs-1 text-success"></i>
-        </div>
-        <h3>Waste Reduction</h3>
-        <p class="text-wrap">Intel aims for zero waste to landfill at major sites by 2030 through innovation.</p>
-        <a href="#" class="btn btn-outline-primary mt-2">Learn More</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Subscription Form Section -->
-  <section class="container my-5" dir="ltr">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-10 col-lg-8">
-        <div class="card bg-white rounded shadow-lg p-5">
-          <h2 class="mb-4 text-center fs-2">Subscribe to our Sustainability Newsletter</h2>
-          <form novalidate>
-            <div class="mb-4">
-              <label for="newsletterEmail" class="form-label fw-semibold">Email address</label>
-              <input type="email" class="form-control form-control-lg" id="newsletterEmail" placeholder="you@example.com" required aria-describedby="emailHelp" style="padding: 1rem;">
-              <div id="emailHelp" class="form-text mt-2">We'll never share your email with anyone else.</div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg w-100 py-3">Subscribe</button>
-          </form>
+        <div class="flex-fill p-4 border rounded bg-white shadow-sm">
+          <i class="bi bi-recycle fs-1" aria-hidden="true"></i>
+          <h3>Waste Reduction</h3>
+          <p>Target zero waste to landfill at major sites by 2030.</p>
+          <a href="#" class="btn btn-primary mt-2">Learn More</a>
         </div>
       </div>
     </div>
-  </section>
-
+    <section class="container my-5" dir="ltr" aria-labelledby="newsletter-heading">
+      <h2 id="newsletter-heading" class="mb-3 text-center">Subscribe to our Sustainability Newsletter</h2>
+      <form role="form" aria-labelledby="newsletter-heading" novalidate>
+        <fieldset>
+          <legend class="visually-hidden">Newsletter Subscription</legend>
+          <div class="mb-3">
+            <label for="newsletterEmail" class="form-label">Email address<span class="visually-hidden"> (required)</span></label>
+            <input type="email" id="newsletterEmail" name="newsletterEmail" class="form-control" placeholder="you@example.com" required aria-required="true" aria-describedby="emailHelp emailError" aria-invalid="false" />
+            <div id="emailHelp" class="form-text">We'll never share your email.</div>
+            <div id="emailError" class="invalid-feedback" aria-live="polite"></div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 btn-lg" aria-label="Subscribe to newsletter">Subscribe</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+  <footer class="bg-dark text-white py-4 mt-auto" role="contentinfo">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-2 mb-md-0">&copy; 2025 Intel Corporation. All rights reserved.</p>
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Terms of Use</a></li>
+        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>
 
